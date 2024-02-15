@@ -1,6 +1,7 @@
 """Display component for calculator"""
 import tkinter as tk
 from tkinter import messagebox
+from math import *
 
 class Display(tk.Label):
     def __init__(self, master=None, cnf={}, **kwargs):
@@ -24,7 +25,9 @@ class Display(tk.Label):
     def input(self, val):
         """update the display when there's a new input"""
         if val in self.fun:
-            if self.current_input[-1] in self.math_operators:
+            if len(self.current_input) == 0:
+                self.current_input.extend([val, '('])
+            elif self.current_input[-1] in self.math_operators:
                 self.current_input.append(val)
                 self.current_input.append('(')
             else:
