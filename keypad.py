@@ -20,8 +20,12 @@ class Keypad(tk.Frame):
         for i ,keynames in enumerate(self.keynames):
             row = i//columns
             column = i % columns
+            colspan = 1
+            if '&colspan=' in keynames:
+                colspan = int(keynames[-1])
+                keynames = keynames[0:-10]
             button = tk.Button(self, text=keynames)
-            button.grid(row=row, column=column, **options)
+            button.grid(row=row, column=column, **options, columnspan=colspan)
             self.rowconfigure(row, weight=1)
             self.columnconfigure(column, weight=1)
 
@@ -68,6 +72,9 @@ if __name__ == '__main__':
     frm = tk.Frame(root)
     root.title("Keypad Demo")
     keypad = Keypad(frm, keynames=keys, columns=3)
+
+    print([i['text'] for i in keypad.children.values()])
+
     keypad['foreground'] = 'red'
     print(keypad['foreground'])
     keypad.bind('<Button>', lambda x: print(x.widget['text']))
