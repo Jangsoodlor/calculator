@@ -23,15 +23,12 @@ class Display(tk.Label):
     def input(self, val):
         """update the display when there's a new input"""
         if val in self.fun:
-            if len(self.current_input) == 0:
-                self.current_input.extend([val, '('])
-            elif self.current_input[-1] in self.math_operators:
-                self.current_input.append(val)
-                self.current_input.append('(')
+            if len(self.current_input) == 0 or\
+            self.current_input[-1] in self.math_operators:
+                self.current_input.extend([f"{val}("])
+
             else:
-                left = []
-                left.append(val)
-                left.append('(')
+                left = [f"{val}("]
                 self.current_input.append(')')
                 self.current_input = left+self.current_input
         else:
@@ -45,8 +42,9 @@ class Display(tk.Label):
 
     def delete(self):
         """delete the last thing inputted from the display"""
-        self.current_input.pop()
-        self.update()
+        if self.current_input:
+            self.current_input.pop()
+            self.update()
 
     def calculate(self):
         if self['fg'] == 'red':
@@ -60,7 +58,7 @@ class Display(tk.Label):
 
     def error(self, e):
         self['fg'] = 'red'
-        messagebox.showerror('Error', e)
+        messagebox.showerror('Error', 'Invalid Input')
 
 if __name__ == '__main__':
     from math import *

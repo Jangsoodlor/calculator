@@ -21,7 +21,7 @@ class HistoryBox(tk.Listbox):
         return self.get(self.curselection())
 
     def error(self):
-        messagebox.showerror('Error', 'Please select an equation')
+        messagebox.showerror('Error', 'Please select an equation first')
 
 if __name__ == '__main__':
     def x(event):

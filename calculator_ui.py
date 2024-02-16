@@ -1,7 +1,6 @@
 """UI module for calculator"""
 import tkinter as tk
 from tkinter import ttk
-from tkinter import font
 from keypad import Keypad
 from display import Display
 from historybox import HistoryBox
@@ -24,25 +23,40 @@ class CalculatorUI(tk.Tk):
         math_func = ['exp', 'log10', 'ln', 'log2', 'sqrt', 'factorial',
                      'sin', 'cos', 'tan', 'ceil', 'floor']
         logic_operators = [' and ', ' or ', ' not ', '==', '<', '>', '<=', '>=']
-
-        self.history_box = HistoryBox(self)
-        self.fun_box = ttk.Combobox(self, values=math_func+logic_operators)
+        history_container = tk.Frame()
+        fun_container = tk.Frame()
+        self.history_box = HistoryBox(history_container)
+        scrollbar = tk.Scrollbar(history_container, orient='vertical',
+                                 command=self.history_box.yview)
+        self.history_box.config(yscrollcommand=scrollbar.set)
+        fun_label = tk.Label(fun_container, text='Select Math Functions here: ')
+        self.fun_box = ttk.Combobox(fun_container,
+                                    values=math_func+logic_operators)
         self.display = Display(self)
-        self.default_font = font.nametofont('TkDefaultFont')
-        self.default_font.configure(family='Arial', size=20, weight='bold')
-        self.num_pad= Keypad(self, ['(',')','DEL','CLS',
+        self.num_pad= Keypad(self, ['(',')','DEL','CLR',
                                     'pi', '**', '%', '/',
                                     '7', '8', '9', '*',
                                     '4', '5', '6', '+',
                                     '1', '2', '3', '-',
                                     'e', '0', '.', '='], columns=4)
-
         self.display.math_operators = ['(',')','**','%','*', '/','+','-','=']
         self.display.fun = math_func
+    
+        self.num_pad['font'] = ('Arial', 20)
+        self.history_box['font'] = ('Arial' ,12)
 
-        self.history_box.pack(side='top', **options)
+        top_label1 = tk.Label(history_container, text='History. Please select equation first,')
+        top_label2 = tk.Label(history_container,
+                        text='Double-Click to display equation. Right-Click to display answer')
+        top_label1.pack(anchor='w', padx=5)
+        top_label2.pack(anchor='w', padx=5)
+        self.history_box.pack(**options, padx=5, pady=5, side='left')
+        scrollbar.pack(side='right', fill='y')
+        history_container.pack(**options)
         self.display.pack(side='top', **options)
-        self.fun_box.pack(fill='both')
+        fun_label.pack(side='left')
+        self.fun_box.pack(side='right', fill=tk.X, expand=True)
+        fun_container.pack(**options, padx=5, pady=5)
         self.num_pad.pack(**options, side='left')
 
 if __name__ == "__main__":

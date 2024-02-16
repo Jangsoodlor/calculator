@@ -13,7 +13,7 @@ class Controller:
         key = event.widget['text'] or event.widget.get()
         if key == '=':
             self.calculate()
-        elif key == 'CLS':
+        elif key == 'CLR':
             self.view.display.clear()
         elif key == 'DEL':
             self.view.display.delete()
