@@ -6,6 +6,8 @@ class Controller:
         self.view = view
         self.model = model
         self.view.bind_keypad(self.keypad_listener)
+        self.view.history_box.bind_left_click(self.get_equation)
+        self.view.history_box.bind_right_click(self.get_answer)
 
     def keypad_listener(self, event):
         key = event.widget['text'] or event.widget.get()
@@ -23,9 +25,29 @@ class Controller:
             before = self.view.display['text']
             self.view.display.calculate()
             after = self.view.display['text']
-            self.model.update(before, after)
+            self.update_history(before, after)
         except Exception as e:
             self.view.display.error(e)
+
+    def update_history(self, before, after):
+        self.model.update(before, after)
+        self.view.history_box.update(self.model.history)
+
+    def get_equation(self, event):
+        try:
+            x = (self.view.history_box.get_selection())
+            self.view.display.current_input = [self.model.get(x, 'equation')]
+            self.view.display.update()
+        except Exception:
+            self.view.history_box.error()
+
+    def get_answer(self, event):
+        try:
+            x = (self.view.history_box.get_selection())
+            self.view.display.current_input = [self.model.get(x)]
+            self.view.display.update()
+        except Exception:
+            self.view.history_box.error()
 
     def run(self):
         self.view.mainloop()

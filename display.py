@@ -60,7 +60,7 @@ class Display(tk.Label):
 
     def error(self, e):
         self['fg'] = 'red'
-        messagebox.showerror('error', e)
+        messagebox.showerror('Error', e)
 
 if __name__ == '__main__':
     from math import *

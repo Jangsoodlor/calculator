@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import font
 from keypad import Keypad
 from display import Display
+from historybox import HistoryBox
 
 class CalculatorUI(tk.Tk):
     """UI for calculator"""
@@ -15,7 +16,7 @@ class CalculatorUI(tk.Tk):
 
     def bind_keypad(self, caller):
         self.num_pad.bind('<Button>', caller)
-        self.fun.bind('<<ComboboxSelected>>', caller)
+        self.fun_box.bind('<<ComboboxSelected>>', caller)
 
     def init_components(self):
         """init components"""
@@ -23,8 +24,10 @@ class CalculatorUI(tk.Tk):
         math_func = ['exp', 'log10', 'ln', 'log2', 'sqrt', 'factorial',
                      'sin', 'cos', 'tan', 'ceil', 'floor']
         logic_operators = [' and ', ' or ', ' not ', '==', '<', '>', '<=', '>=']
-        self.fun = ttk.Combobox(self, values=math_func+logic_operators)
-        self.display = Display()
+
+        self.history_box = HistoryBox(self)
+        self.fun_box = ttk.Combobox(self, values=math_func+logic_operators)
+        self.display = Display(self)
         self.default_font = font.nametofont('TkDefaultFont')
         self.default_font.configure(family='Arial', size=20, weight='bold')
         self.num_pad= Keypad(self, ['(',')','DEL','CLS',
@@ -37,8 +40,9 @@ class CalculatorUI(tk.Tk):
         self.display.math_operators = ['(',')','**','%','*', '/','+','-','=']
         self.display.fun = math_func
 
+        self.history_box.pack(side='top', **options)
         self.display.pack(side='top', **options)
-        self.fun.pack(fill='both')
+        self.fun_box.pack(fill='both')
         self.num_pad.pack(**options, side='left')
 
 if __name__ == "__main__":
