@@ -15,7 +15,6 @@ class Controller:
             self.view.display.delete()
         else:
             self.view.display.input(key)
-        print(self.view.display.current_input)
 
     def calculate(self):
         try:

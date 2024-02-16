@@ -24,7 +24,7 @@ class Keypad(tk.Frame):
             if '&colspan=' in keynames:
                 colspan = int(keynames[-1])
                 keynames = keynames[0:-10]
-            button = tk.Button(self, text=keynames)
+            button = tk.Button(self, text=keynames, width=5)
             button.grid(row=row, column=column, **options, columnspan=colspan)
             self.rowconfigure(row, weight=1)
             self.columnconfigure(column, weight=1)

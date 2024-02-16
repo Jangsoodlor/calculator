@@ -9,14 +9,12 @@ class Display(tk.Label):
         self.current_input = []
         self.math_operators = []
         self.fun = []
-        self.init_components()
-
-    def init_components(self):
-        """initialise components"""
         self.configure(font=('Arial', 50),
                     fg='yellow',
-                    background='black',
-                    anchor='e')
+                    bg='black',
+                    anchor='e',
+                    pady = 50,
+                    padx = 5)
 
     def update(self):
         """update the based on current input"""
@@ -53,7 +51,11 @@ class Display(tk.Label):
     def calculate(self):
         if self['fg'] == 'red':
             self['fg'] = 'yellow'
-        self.current_input = [str(eval(self['text']))]
+        for i, val in enumerate(self.current_input):
+            if val == 'ln':
+                self.current_input[i] = 'log'
+        self.update()
+        self.current_input = [f"{(eval(self['text'])):.5g}"]
         self.update()
 
     def error(self, e):
