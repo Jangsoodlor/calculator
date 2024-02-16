@@ -40,7 +40,7 @@ class Display(tk.Label):
 
     def clear(self):
         """clear the display"""
-        self.current_input = []
+        self.current_input.clear()
         self.update()
 
     def delete(self):
@@ -55,7 +55,7 @@ class Display(tk.Label):
             if val == 'ln':
                 self.current_input[i] = 'log'
         self.update()
-        self.current_input = [f"{(eval(self['text'])):.5g}"]
+        self.current_input = [f"{(eval(self['text'])):.5G}"]
         self.update()
 
     def error(self, e):
@@ -72,11 +72,4 @@ if __name__ == '__main__':
     dp.input('2')
     dp.input('sqrt')
     dp.pack(fill='both', expand=True)
-
-    # lst = ['a', 'b', 'c']
-    # lstvar = tk.Variable(value=lst)
-    # lb = tk.Listbox(root, listvariable=lstvar, height=10, selectmode=tk.SINGLE)
-    # lb.bind('<Double-Button-1>', lambda x: print(lb.get(lb.curselection())))
-    # lb.pack()
-
     root.mainloop()

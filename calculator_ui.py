@@ -20,8 +20,10 @@ class CalculatorUI(tk.Tk):
     def init_components(self):
         """init components"""
         options = {'fill': 'both', 'expand':True}
-        math_func = ['exp', 'log10', 'ln', 'log2', 'sqrt', 'factorial', 'sin', 'cos', 'tan']
-        self.fun = ttk.Combobox(self, values=math_func)
+        math_func = ['exp', 'log10', 'ln', 'log2', 'sqrt', 'factorial',
+                     'sin', 'cos', 'tan', 'ceil', 'floor']
+        logic_operators = [' and ', ' or ', ' not ', '==', '<', '>', '<=', '>=']
+        self.fun = ttk.Combobox(self, values=math_func+logic_operators)
         self.display = Display()
         self.default_font = font.nametofont('TkDefaultFont')
         self.default_font.configure(family='Arial', size=20, weight='bold')
