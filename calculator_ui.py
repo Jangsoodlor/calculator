@@ -59,7 +59,3 @@ class CalculatorUI(tk.Tk):
         self.fun_box.pack(side='right', fill=tk.X, expand=True)
         fun_container.pack(**options, padx=5, pady=5)
         self.num_pad.pack(**options, side='left')
-
-if __name__ == "__main__":
-    calc = CalculatorUI()
-    calc.run()

@@ -1,6 +1,4 @@
-"""The controller module for calculator"""
-from calculator_ui import CalculatorUI
-from model import Model
+"""Controller module for calculator"""
 
 class Controller:
     """The controller module. It manipulates the display and history."""
@@ -60,7 +58,3 @@ class Controller:
     def run(self):
         """run the calculator"""
         self.view.mainloop()
-
-if __name__ == '__main__':
-    controller = Controller(CalculatorUI(), Model())
-    controller.run()

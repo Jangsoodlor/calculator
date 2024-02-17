@@ -7,7 +7,7 @@ import pygame
 
 class Display(tk.Label):
     """The display for the calculator"""
-    def __init__(self, master=None, cnf=None, **kwargs):
+    def __init__(self, master=None, cnf={}, **kwargs):
         super().__init__(master, cnf, **kwargs)
         self.current_input = []
         self.math_operators = []
