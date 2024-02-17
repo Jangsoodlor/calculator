@@ -1,10 +1,13 @@
 """Display component for calculator"""
-import tkinter as tk
-from tkinter import messagebox
 from math import *
+import tkinter as tk
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+import pygame
 
 class Display(tk.Label):
-    def __init__(self, master=None, cnf={}, **kwargs):
+    """The display for the calculator"""
+    def __init__(self, master=None, cnf=None, **kwargs):
         super().__init__(master, cnf, **kwargs)
         self.current_input = []
         self.math_operators = []
@@ -47,6 +50,7 @@ class Display(tk.Label):
             self.update()
 
     def calculate(self):
+        """calculates the result if possible"""
         if self['fg'] == 'red':
             self['fg'] = 'yellow'
         for i, val in enumerate(self.current_input):
@@ -56,12 +60,13 @@ class Display(tk.Label):
         self.current_input = [f"{(eval(self['text'])):.5G}"]
         self.update()
 
-    def error(self, e):
+    def error(self):
+        """notice the user if the calculation is invalid."""
         self['fg'] = 'red'
-        messagebox.showerror('Error', 'Invalid Input')
+        pygame.mixer.init()
+        pygame.mixer.Sound('invalid_input_noise.mp3').play()
 
 if __name__ == '__main__':
-    from math import *
     options = {'fg': 'yellow'}
     root = tk.Tk()
     dp = Display(**options)

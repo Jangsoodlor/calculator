@@ -14,6 +14,7 @@ class CalculatorUI(tk.Tk):
         self.init_components()
 
     def bind_keypad(self, caller):
+        """binds the keypad"""
         self.num_pad.bind('<Button>', caller)
         self.fun_box.bind('<<ComboboxSelected>>', caller)
 
