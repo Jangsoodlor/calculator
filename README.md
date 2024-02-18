@@ -11,4 +11,4 @@ pip install pygame
 ```
 
 ## UML Diagram
-To be uploaded soon
+![uml_class_diagram](uml_diagram.png)
