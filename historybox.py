@@ -10,7 +10,7 @@ class HistoryBox(tk.Listbox):
     def update(self, lst):
         self['listvariable'] = tk.Variable(value=lst)
 
-    def bind_left_click(self, func=None, add=None):
+    def bind_double_click(self, func=None, add=None):
         self.bind('<Double-Button-1>', func, add)
 
     def bind_right_click(self, func=None, add=None):

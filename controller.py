@@ -6,7 +6,7 @@ class Controller:
         self.view = view
         self.model = model
         self.view.bind_keypad(self.keypad_listener)
-        self.view.history_box.bind_left_click(self.get_equation)
+        self.view.history_box.bind_double_click(self.get_equation)
         self.view.history_box.bind_right_click(self.get_answer)
 
     def keypad_listener(self, event):

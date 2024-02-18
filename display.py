@@ -11,7 +11,7 @@ class Display(tk.Label):
         super().__init__(master, cnf, **kwargs)
         self.current_input = []
         self.math_operators = []
-        self.fun = []
+        self.math_func = []
         self.configure(font=('Arial', 50),
                     fg='yellow',
                     bg='black',
@@ -25,7 +25,7 @@ class Display(tk.Label):
 
     def input(self, val):
         """update the display when there's a new input"""
-        if val in self.fun:
+        if val in self.math_func:
             if len(self.current_input) == 0 or\
             self.current_input[-1] in self.math_operators:
                 self.current_input.extend([f"{val}("])
@@ -57,7 +57,7 @@ class Display(tk.Label):
             if val == 'ln':
                 self.current_input[i] = 'log'
         self.update()
-        self.current_input = [f"{(eval(self['text'])):.5G}"]
+        self.current_input = [f"{(eval(self['text'])):.10G}"]
         self.update()
 
     def error(self):
