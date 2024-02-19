@@ -1,4 +1,6 @@
 """Controller module for calculator"""
+import warnings
+warnings.filterwarnings('ignore')
 
 class Controller:
     """The controller module. It manipulates the display and history."""
